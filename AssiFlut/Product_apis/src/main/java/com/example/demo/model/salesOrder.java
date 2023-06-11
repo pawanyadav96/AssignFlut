@@ -27,7 +27,7 @@ public class salesOrder {
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Integer id;
 	 
-	    @NotBlank
+	    
 	    private String customer_name;
 	    private LocalDateTime timestamp;
 	    
