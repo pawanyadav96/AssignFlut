@@ -28,18 +28,15 @@ public class salesServiceImpl implements salesService{
 	private ProductRepo prepo;
 	@Override
 	public salesOrder addSalesOrder(salesOrder salesOrder) throws ProductException, salesOrderException {
-		  List<OrderList> orderItems = salesOrder.getOrderItems();
-	        for (OrderList order : orderItems) {
-	            Optional<Product> product = prepo.findById(order.getProduct().getId());
-	            
-	            Product pp=product.get();
-               // int QuantityNow = pp.getStockquantity()-order.getSales_quantity();
-	            if (pp.getStockquantity() < order.getSales_quantity()) {
+		 for (OrderList order : orderItems) {
+	            Product product = order.getProduct();
+                int QuantityNow = product.getStockquantity()-order.getSales_quantity();
+	            if (QuantityNow < 0) {
 	                throw new ProductException("No product available");
 	            }
 
-	            pp.setStockquantity(pp.getStockquantity() - order.getSales_quantity());
-	            prepo.save(pp);
+	            product.setStockquantity(QuantityNow);
+	            prepo.save(product);
 	        }
 	        return srepo.save(salesOrder);
 	}
