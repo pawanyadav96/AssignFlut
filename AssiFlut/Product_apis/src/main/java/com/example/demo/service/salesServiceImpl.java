@@ -28,7 +28,8 @@ public class salesServiceImpl implements salesService{
 	private ProductRepo prepo;
 	@Override
 	public salesOrder addSalesOrder(salesOrder salesOrder) throws ProductException, salesOrderException {
-		 for (OrderList order : orderItems) {
+		List<OrderList> orderItems = salesOrder.getOrderItems();
+		for (OrderList order : orderItems) {
 	            Product product = order.getProduct();
                 int QuantityNow = product.getStockquantity()-order.getSales_quantity();
 	            if (QuantityNow < 0) {
