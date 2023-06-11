@@ -25,7 +25,7 @@ public class salesOrder {
 	
 	 @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long id;
+	    private Integer id;
 	 
 	    @NotBlank
 	    private String customer_name;
