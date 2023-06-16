@@ -52,15 +52,8 @@ public class ProductServiceImpl implements ProductService {
 		{
 			Product pp=pod.get();
 			
-//			if(pp.getStockquantity()<0 ||pp.getStockquantity() <quantity)
-//			{
-//				throw new ProductException("quantity should be greater than 0 or the entered quantity");
-//			}
-//			else
-//			{
 				pp.setStockquantity(pp.getStockquantity()-quantity);
 				return prepo.save(pp);
-//			}
 		}
 		
 		
@@ -70,6 +63,12 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> getAllProduct() {
 		 List<Product> products =prepo.findAll();
 		 return products;
+		
+	}
+
+	public Product findById(Integer id) throws ProductException {
+		return prepo.findById(id)
+				.orElseThrow(() -> new ProductException("Product not found with id "));
 		
 	}
 	

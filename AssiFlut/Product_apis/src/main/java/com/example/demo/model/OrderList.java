@@ -23,8 +23,8 @@ public class OrderList {
 	
     private Double discount;
    
-    @ManyToOne
     @JsonIgnore
+    @ManyToOne
     public salesOrder sOrder;
 
 }

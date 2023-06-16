@@ -20,7 +20,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class salesOrder {
 	
 	    @Id
@@ -29,6 +28,7 @@ public class salesOrder {
 	 
 	    
 	    private String customer_name;
+	    
 	    private LocalDateTime timestamp;
 	    
 	    @OneToMany(mappedBy = "sOrder",cascade = CascadeType.ALL)

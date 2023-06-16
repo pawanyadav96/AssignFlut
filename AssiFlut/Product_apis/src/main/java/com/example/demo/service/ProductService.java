@@ -9,6 +9,8 @@ public interface ProductService {
 	
 	public Product createProduct(Product product) throws ProductException;
 	
+	public Product findById(Integer id) throws  ProductException ;
+	
     public Product IncreaseProductQuantity(Integer productId,Integer quantity) throws ProductException;
     
    public Product DecreseProductQuantity(Integer productId,Integer quantity) throws ProductException;
