@@ -11,6 +11,7 @@ import com.example.demo.exception.salesOrderException;
 import com.example.demo.model.OrderList;
 import com.example.demo.model.Product;
 import com.example.demo.model.salesOrder;
+import com.example.demo.repository.OrderListRepo;
 import com.example.demo.repository.ProductRepo;
 import com.example.demo.repository.salesRepo;
 
@@ -18,11 +19,14 @@ import com.example.demo.repository.salesRepo;
 public class salesServiceImpl implements salesService{
 
 	
-	@Autowired
-	private salesRepo srepo;
-	
-	
-	
+	  @Autowired
+	  private salesRepo srepo;
+	  
+	 
+	  
+	  @Autowired
+	  private OrderListRepo orrepo;
+	  
 	
 	@Autowired 
 	private ProductRepo prepo;
@@ -31,13 +35,15 @@ public class salesServiceImpl implements salesService{
 		List<OrderList> orderItems = salesOrder.getOrderItems();
 		for (OrderList order : orderItems) {
 	            Product product = order.getProduct();
-                int QuantityNow = product.getStockquantity()-order.getSales_quantity();
-	            if (QuantityNow < 0) {
-	                throw new ProductException("No product available");
-	            }
-
-	            product.setStockquantity(QuantityNow);
-	            prepo.save(product);
+	            
+	            product.setSalePrice(order.getProduct().getSalePrice());
+	            product.setStockquantity(product.getStockquantity()-order.getSales_quantity());
+	            product.setBrandName(order.getProduct().getBrandName());
+	            product.setDescription(order.getProduct().getDescription());
+	            product.setProductName(order.getProduct().getProductName());
+	           
+	        
+                prepo.save(product);
 	        }
 	        return srepo.save(salesOrder);
 	}
@@ -46,4 +52,5 @@ public class salesServiceImpl implements salesService{
 		List<salesOrder> Sales =srepo.findAll();
 		return Sales;
 	}
+
 }

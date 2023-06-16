@@ -23,8 +23,8 @@ import lombok.Setter;
 
 public class salesOrder {
 	
-	 @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @Id
+	    @GeneratedValue(strategy = GenerationType.AUTO)
 	    private Integer id;
 	 
 	    
